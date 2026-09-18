@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestão de Doações</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><div class="brand-icon">✚</div><div><strong>Gestão de Doações</strong><small>Projeto Extensionista</small></div></div>
+  <nav>
+    <div class="menu-title">PRINCIPAL</div>
+    <button class="nav-btn active" data-page="inicio">Início</button>
+    <div class="menu-title">CADASTROS</div>
+    <button class="nav-btn" data-page="doadores">Doadores</button>
+    <div class="menu-title">MOVIMENTAÇÕES</div>
+    <button class="nav-btn" data-page="recebidas">Doações recebidas</button>
+    <button class="nav-btn" data-page="entregas">Doações entregues</button>
+    <div class="menu-title">CONTROLE</div>
+    <button class="nav-btn" data-page="estoque">Estoque</button>
+    <button class="nav-btn" data-page="relatorios">Relatórios</button>
+  </nav>
+</aside>
+
+<main class="content">
+<header class="topbar">
+  <div><h1 id="page-title">Início</h1><p id="page-description">Visão geral do controle de doações da instituição.</p></div>
+  <span class="tag">Sistema Web</span>
+</header>
+
+<section id="inicio" class="page active-page">
+  <div class="cards">
+    <div class="card"><span>Doadores</span><strong id="total-doadores">0</strong></div>
+    <div class="card"><span>Doações recebidas</span><strong id="total-recebidas">0</strong></div>
+    <div class="card"><span>Itens em estoque</span><strong id="total-estoque">0</strong></div>
+    <div class="card"><span>Entregas realizadas</span><strong id="total-entregas">0</strong></div>
+  </div>
+  <div class="dashboard-grid">
+    <div class="panel"><div class="panel-heading"><div><h2>Produtos disponíveis</h2><p>Itens que possuem quantidade no estoque.</p></div><button class="secondary small-btn" data-go="estoque">Ver estoque</button></div><div id="dashboard-estoque"></div></div>
+    <div class="panel"><div class="panel-heading"><div><h2>Últimas movimentações</h2><p>Registros mais recentes do sistema.</p></div></div><div id="dashboard-movimentacoes"></div></div>
+  </div>
+</section>
+
+<section id="doadores" class="page">
+  <div class="panel"><h2>Cadastrar doador</h2>
+    <form id="form-doador" class="form-grid">
+      <input id="doador-nome" required maxlength="80" placeholder="Nome do doador">
+      <input id="doador-contato" maxlength="30" placeholder="Telefone / contato">
+      <button class="primary" type="submit">Cadastrar</button>
+    </form>
+  </div>
+  <div class="panel"><div class="panel-heading"><div><h2>Doadores cadastrados</h2><p>Consulte, edite ou exclua os doadores.</p></div><input id="busca-doador" class="search-input" placeholder="Pesquisar por nome..."></div><div id="lista-doadores"></div></div>
+</section>
+
+<section id="recebidas" class="page">
+  <div class="panel"><h2>Registrar doação recebida</h2>
+    <form id="form-recebida" class="form-grid">
+      <select id="rec-doador" required><option value="">Selecione o doador</option></select>
+      <input id="rec-item" required maxlength="60" placeholder="Produto (ex.: arroz)">
+      <input id="rec-qtd" required min="0.01" step="0.01" type="number" placeholder="Quantidade">
+      <select id="rec-unidade" required><option value="">Unidade</option><option>unidades</option><option>kg</option><option>g</option><option>litros</option><option>ml</option><option>caixas</option><option>pacotes</option><option>sacos</option><option>outros</option></select>
+      <input id="rec-data" required type="date">
+      <button class="primary" type="submit">Registrar doação</button>
+    </form>
+  </div>
+  <div class="panel"><div class="panel-heading"><div><h2>Doações recebidas</h2><p>Histórico das entradas registradas.</p></div><input id="busca-recebida" class="search-input" placeholder="Pesquisar..."></div><div id="lista-recebidas"></div></div>
+</section>
+
+<section id="entregas" class="page">
+  <div class="panel"><h2>Registrar entrega</h2>
+    <form id="form-entrega" class="form-grid">
+      <input id="ent-familia" required maxlength="80" placeholder="Família atendida">
+      <select id="ent-item" required><option value="">Selecione o produto</option></select>
+      <input id="ent-qtd" required min="0.01" step="0.01" type="number" placeholder="Quantidade">
+      <input id="ent-data" required type="date">
+      <button class="primary" type="submit">Registrar entrega</button>
+    </form>
+  </div>
+  <div class="panel"><div class="panel-heading"><div><h2>Doações entregues</h2><p>Histórico das entregas realizadas.</p></div><input id="busca-entrega" class="search-input" placeholder="Pesquisar..."></div><div id="lista-entregas"></div></div>
+</section>
+
+<section id="estoque" class="page">
+  <div class="panel"><div class="panel-heading"><div><h2>Estoque atual</h2><p>Somente produtos com quantidade disponível são exibidos.</p></div><input id="busca-estoque" class="search-input" placeholder="Pesquisar produto..."></div><div id="lista-estoque"></div></div>
+</section>
+
+<section id="relatorios" class="page">
+  <div class="cards">
+    <div class="card"><span>Doações recebidas</span><strong id="rel-total-recebidas">0</strong></div>
+    <div class="card"><span>Entregas realizadas</span><strong id="rel-total-entregas">0</strong></div>
+    <div class="card"><span>Produtos no estoque</span><strong id="rel-produtos">0</strong></div>
+    <div class="card"><span>Itens disponíveis</span><strong id="rel-itens">0</strong></div>
+  </div>
+  <div class="panel"><div class="panel-heading"><div><h2>Resumo por produto</h2><p>Comparação entre o que foi recebido e o que foi entregue.</p></div></div><div id="lista-relatorios"></div></div>
+</section>
+</main>
+
+<div id="modal-editar" class="modal">
+  <div class="modal-box"><div class="modal-header"><h2>Editar doador</h2><button id="fechar-modal" class="close-btn" type="button">×</button></div>
+    <form id="form-editar-doador">
+      <input type="hidden" id="editar-id">
+      <label>Nome</label><input id="editar-nome" required maxlength="80">
+      <label>Telefone / contato</label><input id="editar-contato" maxlength="30">
+      <div class="modal-actions"><button class="secondary" type="button" id="cancelar-modal">Cancelar</button><button class="primary" type="submit">Salvar alterações</button></div>
+    </form>
+  </div>
+</div>
+<div id="toast-container"></div>
+<script src="script.js"></script>
+</body>
+</html>
